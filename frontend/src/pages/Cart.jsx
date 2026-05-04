@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
+import { getImageUrl } from '../utils/imageUrl';
 
 const Cart = () => {
   const { cartItems, removeFromCart } = useContext(CartContext);
@@ -24,7 +25,7 @@ const Cart = () => {
                 {cartItems.map((item) => (
                   <div key={item.cartId} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #eee', paddingBottom: '20px', marginBottom: '20px' }}>
                     <div style={{ display: 'flex', gap: '20px' }}>
-                      <img src={item.image} alt="Item" style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '4px' }} />
+                      <img src={getImageUrl(item.image)} alt="Item" style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '4px' }} />
                       <div>
                         <h4 style={{ fontSize: '1.2rem', marginBottom: '5px' }}>{item.name}</h4>
                         <p style={{ color: 'var(--dark-gray)', fontSize: '0.9rem' }}>Color: {item.colorName}</p>

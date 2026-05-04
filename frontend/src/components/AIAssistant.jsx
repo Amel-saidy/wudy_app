@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import axios from 'axios';
 import { CartContext } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
+import { getImageUrl } from '../utils/imageUrl';
 
 const AIAssistant = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -195,7 +196,7 @@ const AIAssistant = () => {
                                     }}>
                                         {(product.images?.[0] || product.colors?.[0]?.image) && (
                                             <img 
-                                                src={product.images?.[0] || product.colors?.[0]?.image} 
+                                                src={getImageUrl(product.images?.[0] || product.colors?.[0]?.image)} 
                                                 alt={product.name} 
                                                 style={{ width: '100%', height: '100px', objectFit: 'cover', borderRadius: '4px', marginBottom: '5px' }} 
                                             />

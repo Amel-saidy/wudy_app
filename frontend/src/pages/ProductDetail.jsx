@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { getImageUrl } from '../utils/imageUrl';
 import { CartContext } from '../context/CartContext';
 
 const ProductDetail = () => {
@@ -55,7 +56,7 @@ const ProductDetail = () => {
       <section className="responsive-flex" style={{ marginTop: '40px' }}>
         <div style={{ flex: 1 }}>
           <div style={{ height: '600px', borderRadius: '8px', overflow: 'hidden', marginBottom: '20px', background: 'var(--light-gray)' }}>
-            {mainImage && <img src={mainImage} alt="Product" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />}
+            {mainImage && <img src={getImageUrl(mainImage)} alt="Product" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />}
           </div>
           
           <div style={{ display: 'flex', gap: '15px' }}>

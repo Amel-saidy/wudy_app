@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { getImageUrl } from '../utils/imageUrl';
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
@@ -37,7 +38,7 @@ const Shop = () => {
               <Link to={`/product/${product._id}`} key={product._id} className="product-card">
                 {product.is_customizable && <span className="product-badge">Customizable</span>}
                 <div className="product-image">
-                  <img src={product.images && product.images[0] ? product.images[0] : (product.colors && product.colors[0] ? product.colors[0].image : '')} alt={product.name} />
+                  <img src={getImageUrl(product.images && product.images[0] ? product.images[0] : (product.colors && product.colors[0] ? product.colors[0].image : ''))} alt={product.name} />
                 </div>
                 <div className="product-info">
                   <h3>{product.name}</h3>
