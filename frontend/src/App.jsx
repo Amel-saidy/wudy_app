@@ -15,6 +15,7 @@ import AdminOrders from './pages/AdminOrders';
 import AdminCustomRequests from './pages/AdminCustomRequests';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import AIAssistant from './components/AIAssistant';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path="/admin/custom-requests" element={<AdminCustomRequests />} />
         </Routes>
       </main>
+      <AIAssistant />
     </Router>
   );
 }

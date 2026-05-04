@@ -17,7 +17,7 @@ export const CartProvider = ({ children }) => {
       product_id: product._id, 
       name: product.name,
       price: product.price,
-      image: color?.image || product.images?.[0],
+      image: color?.image || product.images?.[0] || product.colors?.[0]?.image,
       colorName: color?.name || 'Default',
       orderType, 
       quantity: 1, 

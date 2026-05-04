@@ -27,7 +27,7 @@ const Checkout = () => {
     }
 
     if (!user) {
-      setError('You must be logged in to place an order.');
+      navigate('/login');
       return;
     }
 
@@ -61,7 +61,7 @@ const Checkout = () => {
     return (
       <div className="container" style={{ textAlign: 'center', padding: '100px 20px' }}>
         <h2 style={{ color: 'green', marginBottom: '20px' }}>Order Placed Successfully!</h2>
-        <p>Thank you for shopping with Wudy Tailoring.</p>
+        <p>Thank you for shopping with Weydi Creation.</p>
         <p>You will be redirected to the shop shortly.</p>
       </div>
     );

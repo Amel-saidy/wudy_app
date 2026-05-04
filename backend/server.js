@@ -9,6 +9,7 @@ const measurementRoutes = require('./routes/measurementRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const customRequestRoutes = require('./routes/customRequestRoutes');
+const aiRoutes = require('./routes/aiRoutes');
 
 dotenv.config();
 
@@ -34,6 +35,7 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/measurements', measurementRoutes);
 app.use('/api/style-requests', customRequestRoutes);
+app.use('/api/ai', aiRoutes);
 
 // Debug Route
 app.get('/api/test-custom', (req, res) => res.json({ message: 'Custom API route is visible' }));

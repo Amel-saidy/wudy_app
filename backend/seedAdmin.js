@@ -8,7 +8,7 @@ const seedAdmin = async () => {
     try {
         await mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/tailoring_db');
 
-        const adminExists = await User.findOne({ email: 'admin@wudytailoring.com' });
+        const adminExists = await User.findOne({ email: 'admin@weydicreation.com' });
 
         if (adminExists) {
             console.log('Admin already exists');
@@ -16,8 +16,8 @@ const seedAdmin = async () => {
         }
 
         const adminUser = new User({
-            name: 'Wudy Admin',
-            email: 'admin@wudytailoring.com',
+            name: 'Weydi Admin',
+            email: 'admin@weydicreation.com',
             password: 'password123', // User model hooks will hash this automatically
             role: 'admin'
         });

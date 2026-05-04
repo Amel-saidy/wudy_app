@@ -13,7 +13,11 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+        required: function() { return !this.isGoogleUser; }
+    },
+    isGoogleUser: {
+        type: Boolean,
+        default: false
     },
     role: {
         type: String,
@@ -25,7 +29,7 @@ const userSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 userSchema.pre('save', async function () {
-    if (!this.isModified('password')) {
+    if (!this.isModified('password') || !this.password) {
         return;
     }
     const salt = await bcrypt.genSalt(10);

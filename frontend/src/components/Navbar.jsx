@@ -20,7 +20,10 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Link to="/" className="navbar-brand" onClick={closeMenu}>Wudy Tailoring</Link>
+        <Link to="/" className="navbar-brand" onClick={closeMenu} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <img src="/Logos.png" alt="Weydi Creation Logo" style={{ height: '40px', width: '40px', borderRadius: '50%', objectFit: 'cover' }} onError={(e) => { e.target.style.display = 'none' }} />
+          Weydi Creation
+        </Link>
         
         <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
           <button 

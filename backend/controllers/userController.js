@@ -2,6 +2,9 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const sendEmail = require('../utils/sendEmail');
+const { OAuth2Client } = require('google-auth-library');
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET || 'fallback_secret', {
@@ -91,7 +94,7 @@ const forgotPassword = async (req, res) => {
     try {
         await sendEmail({
             email: user.email,
-            subject: 'Wudy Tailoring - Password Reset',
+            subject: 'Weydi Creation - Password Reset',
             message
         });
         res.status(200).json({ message: 'Reset link sent to your email directly' });
@@ -124,4 +127,37 @@ const resetPassword = async (req, res) => {
     res.status(200).json({ message: 'Password reset successful. You can now login.' });
 };
 
-module.exports = { registerUser, authUser, getUserProfile, forgotPassword, resetPassword };
+const googleLogin = async (req, res) => {
+    const { tokenId } = req.body;
+    try {
+        const ticket = await client.verifyIdToken({
+            idToken: tokenId,
+            audience: process.env.GOOGLE_CLIENT_ID
+        });
+        const { name, email } = ticket.getPayload();
+        
+        let user = await User.findOne({ email });
+        
+        if (!user) {
+            user = await User.create({
+                name,
+                email,
+                isGoogleUser: true,
+                role: 'customer'
+            });
+        }
+        
+        res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            token: generateToken(user._id),
+        });
+    } catch (error) {
+        console.error("Google Login Error:", error);
+        res.status(400).json({ message: "Google login failed" });
+    }
+};
+
+module.exports = { registerUser, authUser, getUserProfile, forgotPassword, resetPassword, googleLogin };
